@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      #splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #02f7ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="splash-screen">
+      <H3>Mohon tunggu sedang menyiapkan Chatbot...</H3>
+    </div>
+    <script>
+      window.watsonAssistantChatOptions = {
+        integrationID: "ca559c37-423b-413a-a692-2ea495c9cb52", // The ID of this integration.
+        region: "us-south", // The region your integration is hosted in.
+        serviceInstanceID: "9be5a095-c16c-4d73-94d5-e9e98a7090c6", // The ID of your service instance.
+        onLoad: async (instance) => {
+          // Hide the splash screen once the chatbot is ready
+          document.getElementById("splash-screen").style.display = "none";
+          await instance.render();
+        },
+      };
+      setTimeout(function () {
+        const t = document.createElement("script");
+        t.src =
+          "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" +
+          (window.watsonAssistantChatOptions.clientVersion || "latest") +
+          "/WatsonAssistantChatEntry.js";
+        document.head.appendChild(t);
+      });
+    </script>
+  </body>
+</html>
